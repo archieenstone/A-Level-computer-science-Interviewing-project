@@ -3,11 +3,18 @@ import customtkinter
 import subprocess
 from tkinter_webcam import webcam
 from PIL import Image
+import os
 
 userloggedin_ID = str(sys.argv[1])
 
-with open("useridloggedin.txt", "a") as f:
-  f.write(userloggedin_ID)
+
+if os.path.exists("useridloggedin.txt"):
+    os.remove("useridloggedin.txt")
+    with open("useridloggedin.txt", "a") as f:
+        f.write(userloggedin_ID)
+else:
+    with open("useridloggedin.txt", "a") as f:
+        f.write(userloggedin_ID)
 
 interviewgui = customtkinter.CTk()
 interviewgui.title('Interview lab')

@@ -15,7 +15,8 @@ loadingpage = customtkinter.CTk() #create the output app
 loadingpage.title('Loading...') #set a title for the program window 
 loadingpage.geometry('800x500')  # Set window size
 
-text = customtkinter.CTkLabel(loadingpage,text="Loading and emailing your personalised feedback from your recent interview practice session...")
+text = customtkinter.CTkLabel(loadingpage,text="Loading and emailing your personalised feedback from your recent interview practice session... Once the email has been reset you will be redirected back to the home page where you can visit the history tab to recieve your feedback.",
+                              wraplength=500)
 text.pack(pady=20,padx=20)
 
 print('yep moving porgr')

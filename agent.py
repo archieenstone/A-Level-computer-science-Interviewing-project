@@ -2,6 +2,7 @@ import logging
 import sys
 import sqlite3
 import datetime
+import os
 from dotenv import load_dotenv
 from livekit import agents
 from livekit.agents import Agent, AgentServer, AgentSession, JobContext, room_io
@@ -13,6 +14,9 @@ userloggedin_ID = 0
 with open("useridloggedin.txt") as f:
     userloggedin_ID = (f.read())
 print(userloggedin_ID)
+
+if os.path.exists("conversation_log.txt"):
+    os.remove("conversation_log.txt")
 
 db = sqlite3.connect('Interview_lab_database.db')
 cur = db.cursor()
