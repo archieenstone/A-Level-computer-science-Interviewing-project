@@ -8,7 +8,6 @@ client = genai.Client()
 
 doc_url = "conversation_log.txt"
 
-
 prompt = "Summarize this document"
 response = client.models.generate_content(
     model="gemini-3.5-flash",
