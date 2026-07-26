@@ -85,7 +85,7 @@ def home_page_frame():
 
     textinput1frame = customtkinter.CTkFrame(master=editingframe,
                                             width=800,
-                                            height=650)
+                                            height=450)
     textinput1frame.place(x=50, y=175)
     textinput1frame.pack_propagate(False)
 
@@ -96,7 +96,7 @@ def home_page_frame():
 
     inputnewbox = customtkinter.CTkTextbox(textinput1frame,
                                     width=600,
-                                    height=500)
+                                    height=300)
     inputnewbox.pack(pady=10)
 
     btn1 = customtkinter.CTkButton(textinput1frame,
@@ -104,12 +104,12 @@ def home_page_frame():
                                    width=50,
                                    height=30,
                                    command=startinterview)
-    btn1.place(x=375,y=600)
+    btn1.pack(pady=15,padx=350)
 
     textinput2frame = customtkinter.CTkFrame(master=editingframe,
                                             width=800,
-                                            height=650)
-    textinput2frame.place(x=50, y=900)
+                                            height=450)
+    textinput2frame.place(x=50, y=650)
     textinput2frame.pack_propagate(False)
 
     instructiontext2 = customtkinter.CTkLabel(master=textinput2frame,
@@ -119,14 +119,14 @@ def home_page_frame():
 
     inputreusebox = customtkinter.CTkTextbox(textinput2frame,
                                     width=600,
-                                    height=500)
+                                    height=300)
     inputreusebox.pack(pady=10)
 
     btn2 = customtkinter.CTkButton(textinput2frame,
                                    text="Continue",
                                    width=50,
                                    height=30)
-    btn2.place(x=375,y=600)
+    btn2.pack(padx=350, pady=15)
 
 def account_frame():
     global main_frame
