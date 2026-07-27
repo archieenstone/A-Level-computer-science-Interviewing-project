@@ -56,11 +56,14 @@ def connecttoagent():
 
     if btntext1 == "Start interview":
         starttimerbtn.configure(text = "End interview")
+        if os.path.exists("conversation_log.txt"):
+            os.remove("conversation_log.txt")
         subprocess.Popen(["uv", "run", "agent.py", "console"])
         starttimer()
         print('interview assistant lauching...')
     else:
-        subprocess.Popen(["uv", "run", "agent.py", "console"].terminate())
+        None
+        # Here I need to insert some code to shut down the AI agent from running in the command line powershell. 
 
 cmdframe = customtkinter.CTkFrame(interviewgui,
                                   width=1200,

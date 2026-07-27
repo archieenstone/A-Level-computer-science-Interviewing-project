@@ -322,13 +322,20 @@ def history_frame():
     # Clearing everything in the main frame out of memory using the destroy() method then I can pack the new frames/ wdigets into the main frame for this page 
     for widget in main_frame.winfo_children():
         widget.destroy()
+
     titleframe = customtkinter.CTkFrame(master=main_frame,
-                                        width=550,
-                                        height=100)
+                                        width=1100,
+                                        height=125,
+                                        fg_color="transparent")
     titleframe.pack(anchor="center")
     title_font = customtkinter.CTkFont(size=60,weight="bold",family='Roboto', underline=True)
     title = customtkinter.CTkLabel(titleframe, text="History", font=title_font, text_color="blue")
     title.place(x=10,y=10)
+
+    introphrase = customtkinter.CTkLabel(titleframe,
+                                         text="In this page you can read about your feedback from your most recent interview practice. Want your feedback from interview pratices longer ago - remember they have all been emailed to you!.",
+                                         wraplength=900)
+    introphrase.place(x=10,y=100)
 
 def enternewresetpassword(): 
     for widget in main_frame.winfo_children():

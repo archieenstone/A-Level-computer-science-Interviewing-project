@@ -19,7 +19,7 @@ text = customtkinter.CTkLabel(loadingpage,text="Loading and emailing your person
                               wraplength=500)
 text.pack(pady=20,padx=20)
 
-print('yep moving porgr')
+print('yep omving porgr')
 
 db = sqlite3.connect('Interview_lab_database.db')
 cur = db.cursor()
@@ -27,14 +27,15 @@ cur = db.cursor()
 userloggedin_ID = 0
 with open("useridloggedin.txt") as f:
     userloggedin_ID = (f.read())
+    f.close()
 
 cur.execute(f"SELECT email FROM USERS where id = {userloggedin_ID}")
-result = cur.fetchone()
-useremail = result[0]
+resultemail = cur.fetchone()
+useremail = resultemail[0]
 
 cur.execute(f"SELECT username FROM USERS where id = {userloggedin_ID}")
-result = cur.fetchone()
-username = result[0]
+resultusername = cur.fetchone()
+username = resultusername[0]
 
 modified = []
 
@@ -46,15 +47,78 @@ data = file.readlines()
 for line in data:
     modified.append(line.strip())
 
+print(data)
+
 response = client.models.generate_content(
     model="gemini-3.5-flash",
-    contents=f"Summarise the conversation {modified}"
+    contents=f"""
+You are an elite Executive Interview Coach and Behavioral Analyst. Your objective is to analyze a timestamped interview transcript between an Interviewer and a Candidate. 
+
+You must provide a highly structured, objective, and constructive feedback report for the candidate. Use the timestamps to cite specific moments in the transcript to back up your feedback (e.g., "At [04:15], you provided a great example of..."). 
+
+Always balance constructive criticism with positive reinforcement. Format your response EXACTLY using the following markdown headers and bullet points. Do not deviate from this 12-section structure.
+
+### 1. Overall Performance Summary
+* Provide a 3-4 sentence executive summary of the candidate's overall performance, highlighting their strongest trait and their biggest area for improvement.
+
+### 2. The STAR Method Application (Situation, Task, Action, Result)
+* Analyze how well the candidate structured their behavioral answers. 
+* Cite a specific timestamp where they used it perfectly, or a timestamp where they missed an opportunity to use it.
+
+### 3. Filler Words & Vocal Tics
+* Identify any repetitive filler words ("um," "uh," "like," "you know," "essentially"). 
+* Note if they appear clustered around specific types of questions (e.g., "You used 'um' frequently during the technical questions around [08:30]").
+
+### 4. Clarity & Articulation
+* Did the candidate explain complex concepts simply and clearly?
+* Highlight any timestamps where an explanation became convoluted or hard to follow.
+
+### 5. Pacing, Pauses & Timing
+* Use the timestamps to analyze the length of the candidate's answers. 
+* Were there uncomfortably long pauses before answering? Did any answer run on for too long (over 3 minutes)? 
+
+### 6. Relevance & Question Comprehension
+* Did the candidate actually answer the questions being asked, or did they dodge them/go off on a tangent? 
+* Cite specific timestamps where they stayed highly focused or drifted away from the core question.
+
+### 7. Confidence & Assertiveness
+* Analyze the candidate's tone based on their language choices. 
+* Identify passive language (e.g., "I think I helped," "We sort of tried") versus active, confident language (e.g., "I led," "I successfully implemented").
+
+### 8. Professionalism & Vocabulary
+* Was the candidate's language appropriate for a professional setting? 
+* Did they use industry-standard terminology correctly to demonstrate domain expertise?
+
+### 9. Action-Oriented Focus (The "I" vs. "We" Balance)
+* Did the candidate take ownership of their achievements? 
+* Note if they relied too heavily on "we" instead of clearly stating their individual contributions ("I").
+
+### 10. Handling Pressure & Curveballs
+* How did the candidate react to difficult, unexpected, or multi-part questions? 
+* Did they maintain composure, ask clarifying questions, or rush into a poorly thought-out answer? Cite timestamps.
+
+### 11. Active Listening & Engagement
+* Did the candidate acknowledge the interviewer's statements? 
+* Did they seamlessly build on conversational threads, or did it feel like two people talking at each other?
+
+### 12. Actionable Next Steps
+* Provide 3 concrete, highly specific exercises or focus areas the candidate should practice before their next real interview.
+
+---
+### INTERVIEW TRANSCRIPT FOR ANALYSIS:
+[INSERT_TIMESTAMPED_TRANSCRIPT_HERE]
+
+
+"""
 )
 
-feedback = (response.text)
+file.close()
 
-questiontypesdb = (f"UPDATE USERS SET questiondomainsselected = {feedback} WHERE id = '{userloggedin_ID}'")
-cur.execute(questiontypesdb)
+feedback = (response.text)
+print(feedback)
+
+questiontypesdb = ("UPDATE USERS SET lastfeedbacksession = ? WHERE id = ?")
+cur.execute(questiontypesdb, (feedback, userloggedin_ID))
 db.commit()
 
 os.remove("conversation_log.txt")
