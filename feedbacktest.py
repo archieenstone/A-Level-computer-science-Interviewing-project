@@ -108,7 +108,6 @@ Always balance constructive criticism with positive reinforcement. Format your r
 ### INTERVIEW TRANSCRIPT FOR ANALYSIS:
 [INSERT_TIMESTAMPED_TRANSCRIPT_HERE]
 
-
 """
 )
 
