@@ -325,7 +325,7 @@ def history_frame():
 
     titleframe = customtkinter.CTkFrame(master=main_frame,
                                         width=1100,
-                                        height=125,
+                                        height=150,
                                         fg_color="transparent")
     titleframe.pack(anchor="center")
     title_font = customtkinter.CTkFont(size=60,weight="bold",family='Roboto', underline=True)
@@ -336,6 +336,14 @@ def history_frame():
                                          text="In this page you can read about your feedback from your most recent interview practice. Want your feedback from interview pratices longer ago - remember they have all been emailed to you!.",
                                          wraplength=900)
     introphrase.place(x=10,y=100)
+
+    cur.execute(f"SELECT lastfeedbacksession FROM USERS where id = {userloggedin_ID}")
+    result = cur.fetchone()
+    feedback = result[0]
+
+    mostrecentfeedback = customtkinter.CTkScrollableFrame(main_frame, width=880, height=600, label_anchor="e", label_text=feedback)
+    mostrecentfeedback.place(y=160,x=40)
+    mostrecentfeedback.pack_propagate(0)
 
 def enternewresetpassword(): 
     for widget in main_frame.winfo_children():
