@@ -1,0 +1,8 @@
+[2026-07-30 13:40:38] user: Hello. hello
+[2026-07-30 13:40:56] assistant: Good morning. My name is John Holdings, and I will be conducting your interview for the Junior Accountant position at Vertex Financial Solutions. 
+
+To begin, I notice from your CV that you have experience assisting with monthly bank reconciliations at Apex Financial Services. Could you describe a specific situation where you identified and resolved discrepancies during a bank reconciliation process?
+[2026-07-30 13:43:39] user: I think that this is
+[2026-07-30 13:43:43] user: More complicated.
+[2026-07-30 13:43:44] user: more complicated
+[2026-07-30 13:43:45] user: Because you overlap it. because you overlap it
