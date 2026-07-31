@@ -341,9 +341,11 @@ def history_frame():
     result = cur.fetchone()
     feedback = result[0]
 
-    mostrecentfeedback = customtkinter.CTkScrollableFrame(main_frame, width=880, height=600, label_anchor="e", label_text=feedback)
-    mostrecentfeedback.place(y=160,x=40)
-    mostrecentfeedback.pack_propagate(0)
+    scrollingframe = customtkinter.CTkScrollableFrame(main_frame, width=880, height=600)
+    scrollingframe.place(y=160,x=40)
+
+    feedbacktext = customtkinter.CTkLabel(scrollingframe, text=feedback, width=800, wraplength=800, justify="left")
+    feedbacktext.pack(anchor="w")
 
 def enternewresetpassword(): 
     for widget in main_frame.winfo_children():

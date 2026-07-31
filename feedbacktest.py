@@ -54,14 +54,14 @@ def getfeedback():
 
     You must provide a highly structured, objective, and constructive feedback report for the candidate. 
     You are a harsh critic. Do not give the interviewer to much praise in their feedback if they did not perform well in the interview.
-    Always balance constructive criticism with positive reinforcement. Format your response EXACTLY using the following markdown headers and bullet points. Do not deviate from this 12-section structure.
+    You are talking to the interviewee when writing this therefore use words such as "you did" etc instead of saying "the candidate did" etc
+    Format your response EXACTLY using the following markdown headers and bullet points. Do not deviate from this 12-section structure.
 
     ### 1. Overall Performance Summary
     * Provide a 3-4 sentence executive summary of the candidate's overall performance, highlighting their strongest trait and their biggest area for improvement.
 
     ### 2. The STAR Method Application (Situation, Task, Action, Result)
     * Analyze how well the candidate structured their behavioral answers. 
-    * Cite a specific timestamp where they used it perfectly, or a timestamp where they missed an opportunity to use it.
 
     ### 3. Filler Words & Vocal Tics
     * Identify any repetitive filler words ("um," "uh," "like," "you know," "essentially"). 
@@ -69,7 +69,6 @@ def getfeedback():
 
     ### 4. Clarity & Articulation
     * Did the candidate explain complex concepts simply and clearly?
-    * Highlight any timestamps where an explanation became convoluted or hard to follow.
 
     ### 5. Pacing, Pauses & Timing
     * Use the timestamps to analyze the length of the candidate's answers. 
@@ -77,7 +76,6 @@ def getfeedback():
 
     ### 6. Relevance & Question Comprehension
     * Did the candidate actually answer the questions being asked, or did they dodge them/go off on a tangent? 
-    * Cite specific timestamps where they stayed highly focused or drifted away from the core question.
 
     ### 7. Confidence & Assertiveness
     * Analyze the candidate's tone based on their language choices. 
@@ -93,7 +91,7 @@ def getfeedback():
 
     ### 10. Handling Pressure & Curveballs
     * How did the candidate react to difficult, unexpected, or multi-part questions? 
-    * Did they maintain composure, ask clarifying questions, or rush into a poorly thought-out answer? Cite timestamps.
+    * Did they maintain composure, ask clarifying questions, or rush into a poorly thought-out answer?
 
     ### 11. Active Listening & Engagement
     * Did the candidate acknowledge the interviewer's statements? 
@@ -115,20 +113,20 @@ def getfeedback():
 
     msg = EmailMessage()
     msg.set_content(f'''
-    Hello {username},
+Hello {username},
                                 
-    Congratulations on completing your recent interview practice session! Taking the time to sharpen your skills and prepare thoroughly says a lot about your dedication, and we were thrilled to sync up with you.
-    We appreciate the energy and focus you brought to the session. Continuous improvement is the secret weapon to acing the real deal, and you're already putting in the work.
+Congratulations on completing your recent interview practice session! Taking the time to sharpen your skills and prepare thoroughly says a lot about your dedication, and we were thrilled to sync up with you.
+We appreciate the energy and focus you brought to the session. Continuous improvement is the secret weapon to acing the real deal, and you're already putting in the work.
 
-    As promised, here is the direct feedback from your session:
+As promised, here is the direct feedback from your session:
 
-    {feedback}
+{feedback}
 
-    We hope these insights help you fine-tune your approach and build even more confidence. If you have any questions about these notes or want to schedule another round to test out adjustments, just let us know.
-    Keep up the fantastic momentum, and best of luck with your upcoming preparation!
+We hope these insights help you fine-tune your approach and build even more confidence. If you have any questions about these notes or want to schedule another round to test out adjustments, just let us know.
+Keep up the fantastic momentum, and best of luck with your upcoming preparation!
 
-    Best regards,
-    Interview lab team''')
+Best regards,
+Interview lab team''')
 
     msg['Subject'] = 'Feedback from your recent interview practice session'
     msg['From'] = 'interviewlabcommunications@gmail.com'
@@ -158,7 +156,7 @@ title = customtkinter.CTkLabel(loadingpage,
 title.place(x=150,y=10)
 
 
-text = customtkinter.CTkLabel(loadingpage,text="Click below to recieve your personlised feedback. It will be emailed to you once created. Once the email has been reset you will be redirected back to the home page where you can visit the history tab also see your feedback.",
+text = customtkinter.CTkLabel(loadingpage,text="Click below to recieve your personlised feedback. It will be emailed to you once created. Once the email has been reset you will be redirected back to the home page where you can visit the history tab also see your feedback. Please note this might take up to 30secs but once your feedback has been created and emailed to you, you will be automically redirected back to the home page where you can view you feedback or start another interview practice.",
                               wraplength=700)
 text.place(x=50,y=80)
 
