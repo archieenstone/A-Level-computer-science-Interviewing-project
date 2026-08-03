@@ -117,15 +117,21 @@ def home_page_frame():
                                             wraplength=700)
     instructiontext2.pack(pady=10,padx=10)
 
+    cur.execute(f"SELECT recentjobinfo FROM USERS where id = {userloggedin_ID}")
+    result = cur.fetchone()
+    lastjobinfoinput = result[0]
+    
     inputreusebox = customtkinter.CTkTextbox(textinput2frame,
                                     width=600,
                                     height=300)
     inputreusebox.pack(pady=10)
+    inputreusebox.insert("0.0", f"{lastjobinfoinput}")
 
     btn2 = customtkinter.CTkButton(textinput2frame,
                                    text="Continue",
                                    width=50,
-                                   height=30)
+                                   height=30,
+                                   command=startinterview)
     btn2.pack(padx=350, pady=15)
 
 def account_frame():

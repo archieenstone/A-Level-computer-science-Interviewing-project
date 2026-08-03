@@ -5,7 +5,6 @@ from tkinter_webcam import webcam
 from PIL import Image
 import os, signal
 
-
 userloggedin_ID = str(sys.argv[1])
 
 
