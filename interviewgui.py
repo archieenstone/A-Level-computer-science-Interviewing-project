@@ -3,7 +3,8 @@ import customtkinter
 import subprocess
 from tkinter_webcam import webcam
 from PIL import Image
-import os
+import os, signal
+
 
 userloggedin_ID = str(sys.argv[1])
 
@@ -23,6 +24,7 @@ interviewgui.geometry('1200x700')
 running = False
 hours, minutes, seconds = 0,0,0
 btntext1 = "Start interview"
+agent_action = None
 
 def helpinstructionsopen():
     subprocess.Popen([sys.executable, "helpinstructions.py"]) 
@@ -53,17 +55,24 @@ def updatetimer():
 
 def connecttoagent():
     global btntext1
+    global agent_action
+    global userloggedin_ID
 
     if btntext1 == "Start interview":
         starttimerbtn.configure(text = "End interview")
+        btntext1 = "End interview"
         if os.path.exists("conversation_log.txt"):
             os.remove("conversation_log.txt")
-        subprocess.Popen(["uv", "run", "agent.py", "console"])
+        agent_action = subprocess.Popen(["uv", "run", "agent.py", "console"])
         starttimer()
         print('interview assistant lauching...')
     else:
-        None
-        # Here I need to insert some code to shut down the AI agent from running in the command line powershell. 
+        subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
+        print('feedback page opened')
+        subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
+        print('agent terminated')
+        sys.exit()
+        agent_action = None
 
 cmdframe = customtkinter.CTkFrame(interviewgui,
                                   width=1200,
