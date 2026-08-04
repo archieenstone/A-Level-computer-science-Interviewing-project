@@ -7,7 +7,6 @@ import os, signal
 
 userloggedin_ID = str(sys.argv[1])
 
-
 if os.path.exists("useridloggedin.txt"):
     os.remove("useridloggedin.txt")
     with open("useridloggedin.txt", "a") as f:
