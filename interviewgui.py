@@ -4,6 +4,7 @@ import subprocess
 from tkinter_webcam import webcam
 from PIL import Image
 import os, signal
+import sqlite3
 
 userloggedin_ID = str(sys.argv[1])
 
@@ -18,6 +19,13 @@ else:
 interviewgui = customtkinter.CTk()
 interviewgui.title('Interview lab')
 interviewgui.geometry('1200x700')
+
+db = sqlite3.connect('Interview_lab_database.db')
+cur = db.cursor()
+
+cur.execute(f"SELECT lengthofinterview FROM USERS where id = {userloggedin_ID}")
+result = cur.fetchone()
+timeofinterview = result[0]
 
 running = False
 hours, minutes, seconds = 0,0,0
@@ -35,7 +43,15 @@ def starttimer():
     
 def updatetimer():
     global hours, minutes, seconds
+    global timeofinterview
+    global agent_action
+
+    timetostop = 1
+
     seconds += 1
+    if minutes == timetostop:
+        print('time finished... stopping agent')
+        subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
     if seconds == 60:
         minutes += 1
         seconds = 0
@@ -50,6 +66,9 @@ def updatetimer():
     timerdisplay.configure(text = hours_string + ':' + minutes_string + ':' + seconds_string)
     
     timerdisplay.after(1000, updatetimer)
+
+
+
 
 def connecttoagent():
     global btntext1

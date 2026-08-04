@@ -123,24 +123,24 @@ questiondomainsoptions.place(x=140,y=130)
 hbc = customtkinter.IntVar(value=0)
 questiondomainsoptions = customtkinter.CTkCheckBox(dropdownframe, text='History, behaviour and compentency', variable=hbc, onvalue=1, offvalue=0)
 questiondomainsoptions.place(x=140,y=155)
-hbc = customtkinter.IntVar(value=0)
-questiondomainsoptions = customtkinter.CTkCheckBox(dropdownframe, text='History, behaviour and compentency', variable=hbc, onvalue=1, offvalue=0)
-questiondomainsoptions.place(x=140,y=155)
+pp = customtkinter.IntVar(value=0)
+questiondomainsoptions = customtkinter.CTkCheckBox(dropdownframe, text='Pitch practicing', variable=pp, onvalue=1, offvalue=0)
+questiondomainsoptions.place(x=140,y=180)
 
 label2 = customtkinter.CTkLabel(dropdownframe, text="Length of interview")
-label2.place(x=150,y=190)
+label2.place(x=150,y=215)
 lengthoption = customtkinter.CTkOptionMenu(dropdownframe, values=timeoption)
-lengthoption.place(x=150,y=215)
+lengthoption.place(x=150,y=240)
 
 label3 = customtkinter.CTkLabel(dropdownframe, text="Interviewer persona")
-label3.place(x=150,y=250)
+label3.place(x=150,y=275)
 persona = customtkinter.CTkOptionMenu(dropdownframe, values=interviewerpersona)
-persona.place(x=150,y=275)
+persona.place(x=150,y=300)
 
 label4 = customtkinter.CTkLabel(dropdownframe, text="Difficulty level")
-label4.place(x=150,y=310)
+label4.place(x=150,y=335)
 diflevel = customtkinter.CTkOptionMenu(dropdownframe, values=difficultyoptions)
-diflevel.place(x=150,y=335)
+diflevel.place(x=150,y=360)
 
 continuebtn = customtkinter.CTkButton(u_error_page,
                                    text="Continue",

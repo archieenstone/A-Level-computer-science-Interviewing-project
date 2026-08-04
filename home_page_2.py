@@ -35,12 +35,25 @@ def changelightdark():
 def home_page_frame():
     def startinterview():
         jobinfo = inputnewbox.get("1.0", "end-1c")
-        sql = (f"UPDATE USERS SET recentjobinfo = '{jobinfo}' WHERE id = '{userloggedin_ID}'") # Basically a repeat of the code above for putting the password in now. Added to the SQL statement to ensure that the password and username are entered into the same record 
-        cur.execute(sql)
-        db.commit()
+        if jobinfo == "":
+            subprocess.Popen([sys.executable, "error message for empty interview info.py", str(userloggedin_ID)])
+        else:
+            sql = (f"UPDATE USERS SET recentjobinfo = '{jobinfo}' WHERE id = '{userloggedin_ID}'") # Basically a repeat of the code above for putting the password in now. Added to the SQL statement to ensure that the password and username are entered into the same record 
+            cur.execute(sql)
+            db.commit()
+            subprocess.Popen([sys.executable, "interview_setup_set.py", str(userloggedin_ID)])
+            sys.exit()
 
-        subprocess.Popen([sys.executable, "interview_setup_set.py", str(userloggedin_ID)])
-        sys.exit()
+    def startinterview01():
+            jobinfo = inputreusebox.get("1.0", "end-1c")
+            if jobinfo == "":
+                subprocess.Popen([sys.executable, "error message for empty interview info.py", str(userloggedin_ID)])
+            else:
+                sql = (f"UPDATE USERS SET recentjobinfo = '{jobinfo}' WHERE id = '{userloggedin_ID}'") # Basically a repeat of the code above for putting the password in now. Added to the SQL statement to ensure that the password and username are entered into the same record 
+                cur.execute(sql)
+                db.commit()
+                subprocess.Popen([sys.executable, "interview_setup_set.py", str(userloggedin_ID)])
+                sys.exit()
 
     global main_frame
     # Clearing everything in the main frame out of memory using the destroy() method then I can pack the new frames/ wdigets into the main frame for this page 
@@ -131,7 +144,7 @@ def home_page_frame():
                                    text="Continue",
                                    width=50,
                                    height=30,
-                                   command=startinterview)
+                                   command=startinterview01)
     btn2.pack(padx=350, pady=15)
 
 def account_frame():
