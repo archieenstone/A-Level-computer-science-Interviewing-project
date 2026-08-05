@@ -8,6 +8,7 @@ import sqlite3
 
 userloggedin_ID = str(sys.argv[1])
 
+
 if os.path.exists("useridloggedin.txt"):
     os.remove("useridloggedin.txt")
     with open("useridloggedin.txt", "a") as f:
@@ -46,15 +47,33 @@ def updatetimer():
     global timeofinterview
     global agent_action
 
-    timetostop = 1
+    def stopagentaftertime():
+        print('time finished... stopping agent then redirecting you to feedback page')
+        subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
+        print('feedback page opened')
+        subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
+        print('agent terminated')
+        sys.exit()
+
+    if timeofinterview == "10mins":
+        timetostop = 10
+    elif timeofinterview == "15mins":
+        timetostop = 15
+    elif timeofinterview == "20mins":
+        timetostop = 20
+    elif timeofinterview == "30mins":
+        timetostop = 30
+    elif timeofinterview == "45mins":
+        timetostop = 45
+    elif timeofinterview == "60mins":
+        timetostop = 60
 
     seconds += 1
-    if minutes == timetostop:
-        print('time finished... stopping agent')
-        subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
     if seconds == 60:
         minutes += 1
         seconds = 0
+    if minutes == timetostop:
+        stopagentaftertime()
     if minutes == 60:
         hours =+ 1
         minutes = 0
@@ -65,10 +84,7 @@ def updatetimer():
 
     timerdisplay.configure(text = hours_string + ':' + minutes_string + ':' + seconds_string)
     
-    timerdisplay.after(1000, updatetimer)
-
-
-
+    timerdisplay.after(10, updatetimer)
 
 def connecttoagent():
     global btntext1
