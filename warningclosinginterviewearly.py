@@ -1,6 +1,12 @@
 import customtkinter
 import win32api
 import win32gui
+from interviewgui import agent_action
+import subprocess
+import sys
+
+userloggedin_ID = str(sys.argv[1])
+
 
 customtkinter.set_appearance_mode('light') 
 customtkinter.set_default_color_theme('blue') 
@@ -15,14 +21,20 @@ def turnoffmic():
     hwnd_active = win32gui.GetForegroundWindow()
     win32api.SendMessage(hwnd_active, WM_APPCOMMAND, None, APPCOMMAND_MICROPHONE_VOLUME_MUTE)
 
-
 turnoffmic()
 
 def closeinterviewearly():
-    None
+    global agent_action
+    print('Closing interview early...')
+    print('Opening feedback page...')
+    subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
+    print('Feedback page opened')
+    subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
+    print('Agent terminated')
+    sys.exit()
 
 def returntointerview():
-    None
+    sys.exit()
 
 title_font = customtkinter.CTkFont(size=40,weight="bold",family='Roboto', underline=True)
 

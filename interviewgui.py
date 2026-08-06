@@ -5,9 +5,9 @@ from tkinter_webcam import webcam
 from PIL import Image
 import os, signal
 import sqlite3
+import threading
 
 userloggedin_ID = str(sys.argv[1])
-
 
 if os.path.exists("useridloggedin.txt"):
     os.remove("useridloggedin.txt")
@@ -41,19 +41,19 @@ def starttimer():
     if not running:
         updatetimer()
         running = True
+
+def stopagentaftertime():
+    print('time finished... stopping agent then redirecting you to feedback page')
+    subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
+    print('feedback page opened')
+    subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
+    print('agent terminated')
+    sys.exit()
     
 def updatetimer():
     global hours, minutes, seconds
     global timeofinterview
     global agent_action
-
-    def stopagentaftertime():
-        print('time finished... stopping agent then redirecting you to feedback page')
-        subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
-        print('feedback page opened')
-        subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
-        print('agent terminated')
-        sys.exit()
 
     if timeofinterview == "10mins":
         timetostop = 10
@@ -84,28 +84,24 @@ def updatetimer():
 
     timerdisplay.configure(text = hours_string + ':' + minutes_string + ':' + seconds_string)
     
-    timerdisplay.after(10, updatetimer)
+    timerdisplay.after(1000, updatetimer)
 
-def connecttoagent():
+def connecttoagent():        
     global btntext1
     global agent_action
     global userloggedin_ID
+    global running
 
     if btntext1 == "Start interview":
-        starttimerbtn.configure(text = "End interview")
         btntext1 = "End interview"
+        starttimerbtn.configure(text = "End interview")
         if os.path.exists("conversation_log.txt"):
             os.remove("conversation_log.txt")
         agent_action = subprocess.Popen(["uv", "run", "agent.py", "console"])
         starttimer()
         print('interview assistant lauching...')
     else:
-        subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
-        print('feedback page opened')
-        subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
-        print('agent terminated')
-        sys.exit()
-        agent_action = None
+        subprocess.Popen([sys.executable, "warningclosinginterviewearly.py", str(userloggedin_ID)])
 
 cmdframe = customtkinter.CTkFrame(interviewgui,
                                   width=1200,
