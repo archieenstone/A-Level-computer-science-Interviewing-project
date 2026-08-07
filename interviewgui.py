@@ -3,9 +3,8 @@ import customtkinter
 import subprocess
 from tkinter_webcam import webcam
 from PIL import Image
-import os, signal
+import os
 import sqlite3
-import threading
 
 userloggedin_ID = str(sys.argv[1])
 
@@ -100,7 +99,8 @@ def connecttoagent():
         agent_action = subprocess.Popen(["uv", "run", "agent.py", "console"])
         starttimer()
         print('interview assistant lauching...')
-    else:
+    elif btntext1 == "End interview":
+        print('ending interview warning message appearing')
         subprocess.Popen([sys.executable, "warningclosinginterviewearly.py", str(userloggedin_ID)])
 
 cmdframe = customtkinter.CTkFrame(interviewgui,
