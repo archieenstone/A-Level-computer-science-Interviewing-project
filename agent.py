@@ -10,6 +10,7 @@ from livekit.plugins import noise_cancellation, silero
 from livekit.agents.llm import ChatMessage
 
 userloggedin_ID = 0
+x = f = open("conversation_log.txt", "x") # Creates a new file always otherwise a bug occurs that if there is no conversation 
 
 with open("useridloggedin.txt") as f:
     userloggedin_ID = (f.read())
