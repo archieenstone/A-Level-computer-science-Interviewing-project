@@ -9,13 +9,12 @@ import sqlite3
 userloggedin_ID = str(sys.argv[1])
 agent_action = None
 
-
 if os.path.exists("useridloggedin.txt"):
     os.remove("useridloggedin.txt")
-    with open("useridloggedin.txt", "a") as f:
+    with open("useridloggedin.txt", "w") as f:
         f.write(userloggedin_ID)
 else:
-    with open("useridloggedin.txt", "a") as f:
+    with open("useridloggedin.txt", "w") as f:
         f.write(userloggedin_ID)
 
 interviewgui = customtkinter.CTk()
@@ -45,7 +44,7 @@ def starttimer():
 def stopagentaftertime():
     global agent_action
     print('time finished... stopping agent then redirecting you to feedback page')
-    subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID), str(agent_action)])
+    subprocess.Popen([sys.executable, "feedbacktest.py", str(agent_action)])
     print('feedback page opened')
     subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
     print('agent terminated')
@@ -100,6 +99,10 @@ def connecttoagent():
             os.remove("conversation_log.txt")
         agent_action = subprocess.Popen(["uv", "run", "agent.py", "console"])
         starttimer()
+
+        x = agent_action.pid
+        with open("agentpid.pid", "w") as f:
+            f.write(str(x))
         print('interview assistant lauching...')
     elif btntext1 == "End interview":
         print('ending interview warning message appearing')

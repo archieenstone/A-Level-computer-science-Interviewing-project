@@ -13,9 +13,13 @@ customtkinter.set_default_color_theme('blue')
 
 u_error_page = customtkinter.CTk()
 u_error_page.title('Interview set up options') 
-u_error_page.geometry('800x600') 
+u_error_page.geometry('800x600')
+
+startinterviewcmd = None
 
 def startinterview():
+    global startinterviewcmd
+
     length = lengthoption.get()
     lengthdb = (f"UPDATE USERS SET lengthofinterview = '{length}' WHERE id = '{userloggedin_ID}'")
     cur.execute(lengthdb)
@@ -66,7 +70,10 @@ def startinterview():
     cur.execute(questiontypesdb)
     db.commit()
 
-    subprocess.Popen([sys.executable, "interviewgui.py", str(userloggedin_ID)])
+    startinterviewcmd = subprocess.Popen([sys.executable, "interviewgui.py", str(userloggedin_ID)])
+    x = startinterviewcmd.pid
+    with open("guipid.pid", "w") as f:
+        f.write(str(x))
     sys.exit()
 
 difficultyoptions = ['Easy', 'Medium', 'Hard', 'Very challenging']

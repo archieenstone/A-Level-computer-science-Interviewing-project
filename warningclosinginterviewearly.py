@@ -3,9 +3,23 @@ import win32api
 import win32gui
 import subprocess
 import sys
+import os
+import signal
 
-userloggedin_ID = str(sys.argv[1])
-agent_action = sys.argv[2]
+agent_action = str(sys.argv[1])
+
+userloggedin_ID = 0
+with open("useridloggedin.txt") as f:
+    userloggedin_ID = (f.read().strip())
+    f.close()
+
+with open("guipid.pid", "r") as f:
+    mainwindowpid = (f.read().strip()) # .strip() function removes the blank space at the end of the collection of numbers
+os.remove("guipid.pid")
+
+with open("agentpid.pid", "r") as f:
+    agentrunpid = (f.read().strip()) # .strip() function removes the blank space at the end of the collection of numbers
+os.remove("agentpid.pid")
 
 customtkinter.set_appearance_mode('light') 
 customtkinter.set_default_color_theme('blue') 
@@ -16,12 +30,15 @@ u_error_page.geometry('600x400')
 
 def closeinterviewearly():
     global agent_action
+    global agentrunpid
+    global mainwindowpid
     print('Closing interview early...')
     print('Opening feedback page...')
     subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
     print('Feedback page opened')
-    subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
-    print('Agent terminated')
+    subprocess.run(["taskkill", "/F", "/T", "/PID", str(agentrunpid)])
+
+    os.kill(int(mainwindowpid), signal.SIGTERM) # https://zetcode.com/python/os-kill/
     sys.exit()
 
 def returntointerview():
