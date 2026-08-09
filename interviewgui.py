@@ -7,6 +7,8 @@ import os
 import sqlite3
 
 userloggedin_ID = str(sys.argv[1])
+agent_action = None
+
 
 if os.path.exists("useridloggedin.txt"):
     os.remove("useridloggedin.txt")
@@ -30,7 +32,6 @@ timeofinterview = result[0]
 running = False
 hours, minutes, seconds = 0,0,0
 btntext1 = "Start interview"
-agent_action = None
 
 def helpinstructionsopen():
     subprocess.Popen([sys.executable, "helpinstructions.py"]) 
@@ -42,8 +43,9 @@ def starttimer():
         running = True
 
 def stopagentaftertime():
+    global agent_action
     print('time finished... stopping agent then redirecting you to feedback page')
-    subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID)])
+    subprocess.Popen([sys.executable, "feedbacktest.py", str(userloggedin_ID), str(agent_action)])
     print('feedback page opened')
     subprocess.run(["taskkill", "/F", "/T", "/PID", str(agent_action.pid)])
     print('agent terminated')
@@ -83,7 +85,7 @@ def updatetimer():
 
     timerdisplay.configure(text = hours_string + ':' + minutes_string + ':' + seconds_string)
     
-    timerdisplay.after(1000, updatetimer)
+    timerdisplay.after(10, updatetimer)
 
 def connecttoagent():        
     global btntext1

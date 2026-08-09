@@ -1,12 +1,11 @@
 import customtkinter
 import win32api
 import win32gui
-from interviewgui import agent_action
 import subprocess
 import sys
 
 userloggedin_ID = str(sys.argv[1])
-
+agent_action = sys.argv[2]
 
 customtkinter.set_appearance_mode('light') 
 customtkinter.set_default_color_theme('blue') 
@@ -14,14 +13,6 @@ customtkinter.set_default_color_theme('blue')
 u_error_page = customtkinter.CTk() 
 u_error_page.title('Ending interview early') 
 u_error_page.geometry('600x400')
-
-def turnoffmic():
-    WM_APPCOMMAND = 0x319
-    APPCOMMAND_MICROPHONE_VOLUME_MUTE = 0x180000
-    hwnd_active = win32gui.GetForegroundWindow()
-    win32api.SendMessage(hwnd_active, WM_APPCOMMAND, None, APPCOMMAND_MICROPHONE_VOLUME_MUTE)
-
-turnoffmic()
 
 def closeinterviewearly():
     global agent_action
