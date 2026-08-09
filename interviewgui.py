@@ -118,6 +118,11 @@ cameraframe = customtkinter.CTkFrame(interviewgui,
                                      height=640)
 cameraframe.place(x=100,y=60)
 
+video = webcam.Box(cameraframe, 
+                   width = 1200, 
+                   height = 750)
+video.show_frames()
+
 timerfont = customtkinter.CTkFont(size=30)
 
 timerdisplay = customtkinter.CTkLabel(cmdframe, width=50,height=40, text='00:00:00', font=timerfont)
