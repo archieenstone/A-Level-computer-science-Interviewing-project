@@ -84,7 +84,7 @@ def updatetimer():
 
     timerdisplay.configure(text = hours_string + ':' + minutes_string + ':' + seconds_string)
     
-    timerdisplay.after(10, updatetimer)
+    timerdisplay.after(1000, updatetimer)
 
 def connecttoagent():        
     global btntext1
