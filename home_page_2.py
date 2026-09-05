@@ -31,6 +31,9 @@ def changelightdark():
         customtkinter.set_appearance_mode("light")
         colourmode = "light"
 
+def helpinstructionsopen():
+    subprocess.Popen([sys.executable, "helpinstructions.py"]) 
+
 # Function for displaying whats in the home page 
 def home_page_frame():
     def startinterview():
@@ -146,6 +149,11 @@ def home_page_frame():
                                    height=30,
                                    command=startinterview01)
     btn2.pack(padx=350, pady=15)
+
+    questionmark = customtkinter.CTkImage(light_image=Image.open("helpimage.png"),size=(35,25))
+
+    helpbtn = customtkinter.CTkButton(editingframe, image=questionmark, text="", command=helpinstructionsopen, width=35, height=25)
+    helpbtn.place(x=900,y=10)
 
 def account_frame():
     global main_frame
@@ -283,6 +291,11 @@ def account_frame():
                                      command=logoutcmd)
     logout.place(x=10, y=340)
 
+    questionmark = customtkinter.CTkImage(light_image=Image.open("helpimage.png"),size=(35,25))
+
+    helpbtn = customtkinter.CTkButton(editingframe, image=questionmark, text="", command=helpinstructionsopen, width=35, height=25)
+    helpbtn.place(x=900,y=10)
+
 def settings_frame():
     global main_frame
     # Clearing everything in the main frame out of memory using the destroy() method then I can pack the new frames/ wdigets into the main frame for this page 
@@ -337,6 +350,11 @@ def settings_frame():
     light_dark = customtkinter.CTkButton(settingsmainframe, text="Change Light/dark", command=changelightdark)
     light_dark.place(y=50,x=10)
 
+    questionmark = customtkinter.CTkImage(light_image=Image.open("helpimage.png"),size=(35,25))
+
+    helpbtn = customtkinter.CTkButton(editingframe, image=questionmark, text="", command=helpinstructionsopen, width=35, height=25)
+    helpbtn.place(x=900,y=10)
+
 def history_frame():
     # Clearing everything in the main frame out of memory using the destroy() method then I can pack the new frames/ wdigets into the main frame for this page 
     for widget in main_frame.winfo_children():
@@ -365,6 +383,11 @@ def history_frame():
 
     feedbacktext = customtkinter.CTkLabel(scrollingframe, text=feedback, width=800, wraplength=800, justify="left")
     feedbacktext.pack(anchor="w")
+
+    questionmark = customtkinter.CTkImage(light_image=Image.open("helpimage.png"),size=(35,25))
+
+    helpbtn = customtkinter.CTkButton(main_frame, image=questionmark, text="", command=helpinstructionsopen, width=35, height=25)
+    helpbtn.place(x=900,y=10)
 
 def enternewresetpassword(): 
     for widget in main_frame.winfo_children():
