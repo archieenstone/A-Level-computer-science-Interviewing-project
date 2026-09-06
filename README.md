@@ -5,9 +5,13 @@ Welcome to my A-Level computer science coursework. The name of the program is 'I
 🌟 Highlights
 
 User log-in system
+
 Input job information such as your CV and the job specification
+
 Customise your interview - what type of questions you want to be asked, what persona your interview will be, time length of interview and difficulty level
+
 Run a interview simulation using LiveKit's realtime live voice agents
+
 Receive useful personalised feedback on your interview simulation within 30secs of finishing the interview
 
 ℹ️ Overview
