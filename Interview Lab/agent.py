@@ -8,6 +8,15 @@ from livekit import agents
 from livekit.agents import Agent, AgentServer, AgentSession, JobContext, room_io
 from livekit.plugins import noise_cancellation, silero
 from livekit.agents.llm import ChatMessage
+from pathlib import Path
+
+path = Path("conversation_log.txt")
+
+if path.exists():
+    os.remove("conversation_log.txt")
+    path = None
+else:
+    path = None
 
 userloggedin_ID = 0
 
