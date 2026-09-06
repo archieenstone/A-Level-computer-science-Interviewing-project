@@ -1,5 +1,4 @@
-hello this is a interview 
-hi 
-ok lets start 
-what did you learn at work experience at the coop
-great
+[2026-09-05 20:35:03] user: Hello
+[2026-09-05 20:35:20] assistant: Good morning. I am John Holdings from Oakridge Family Medical Centre. Thank you for applying for the Registered General Nurse position here. Let's begin by focusing on your current role at St. Jude’s NHS Trust. Could you describe how your experience managing acute medical patients there has prepared you for the challenges of primary care nursing with us, specifically regarding chronic disease management
+[2026-09-05 20:37:16] user: Hello. hello
+[2026-09-05 20:37:23] assistant: Good morning. My name is John Holdings, and I am here representing Oakridge Family Medical

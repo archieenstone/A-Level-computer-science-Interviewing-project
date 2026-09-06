@@ -95,8 +95,6 @@ def connecttoagent():
     if btntext1 == "Start interview":
         btntext1 = "End interview"
         starttimerbtn.configure(text = "End interview")
-        if os.path.exists("conversation_log.txt"):
-            os.remove("conversation_log.txt")
         agent_action = subprocess.Popen(["uv", "run", "agent.py", "console"])
         starttimer()
 
