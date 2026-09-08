@@ -155,8 +155,7 @@ def forgot_password():
                                             command=checkcode)
     submitcodebtn.place(y=170,x=100)
 
-    logoimage = customtkinter.CTkImage(light_image=Image.open("Interview lab logo.png"),
-	size=(80,80))
+    logoimage = customtkinter.CTkImage(light_image=Image.open("Interview lab logo.png"),size=(80,80))
 
     logoframe = customtkinter.CTkFrame(login_page,
                                     width=80,
@@ -682,8 +681,7 @@ def passwordresetsuccess():
                                         text="")
     imagelabel.place(x=0,y=0)
 
-logoimage = customtkinter.CTkImage(light_image=Image.open("Interview lab logo.png"),
-	size=(80,80))
+logoimage = customtkinter.CTkImage(light_image=Image.open("Interview lab logo.png"),size=(80,80))
 
 logoframe = customtkinter.CTkFrame(login_page,
                                    width=80,
