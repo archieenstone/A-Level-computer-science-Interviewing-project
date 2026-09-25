@@ -97,7 +97,6 @@ def connecttoagent():
         starttimerbtn.configure(text = "End interview")
         agent_action = subprocess.Popen(["uv", "run", "agent.py", "console"])
         starttimer()
-
         x = agent_action.pid
         with open("agentpid.pid", "w") as f:
             f.write(str(x))

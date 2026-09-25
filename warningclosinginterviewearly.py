@@ -38,7 +38,7 @@ def closeinterviewearly():
     print('Feedback page opened')
     subprocess.run(["taskkill", "/F", "/T", "/PID", str(agentrunpid)])
 
-    os.kill(int(mainwindowpid), signal.SIGTERM) # https://zetcode.com/python/os-kill/
+    os.kill(int(mainwindowpid), signal.SIGTERM)
     sys.exit()
 
 def returntointerview():
